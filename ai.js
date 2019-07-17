@@ -1,10 +1,11 @@
-function check() {
+function dinoAI() {
     if (Runner.instance_.horizon.obstacles.length > 0) {
         let dist = (Runner.instance_.horizon.obstacles[0].xPos || 300);
         let obj = Runner.instance_.horizon.obstacles[0];
         let type = obj.typeConfig.type;
-        if (dist < 140) {
-            if (type === 'PTERODACTYL' && obj.yPos > 100) {
+        let speed = Runner.instance_.currentSpeed;
+        if (dist < speed * 22) {
+            if (type === 'PTERODACTYL' && obj.yPos < 60) {
                 if(!Runner.instance_.tRex.ducking) Runner.instance_.tRex.setDuck(true);
             } else {
                 if(Runner.instance_.tRex.ducking) Runner.instance_.tRex.setDuck(false);
@@ -12,5 +13,6 @@ function check() {
             }
         }
     }
-    requestAnimationFrame(check);
+    requestAnimationFrame(dinoAI);
 }
+dinoAI();
